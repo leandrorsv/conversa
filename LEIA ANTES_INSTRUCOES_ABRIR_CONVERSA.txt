@@ -1,0 +1,13 @@
+COMO ABRIR A CONVERSA
+
+1. Baixe o arquivo ZIP
+2. Clique com o botão direito nele
+3. Escolha "Extrair" ou "Extrair aqui"
+4. Abra a pasta que foi criada
+5. Dê dois cliques no arquivo chamado "ABRIR_AQUI.html"
+
+Pronto! A conversa vai abrir no navegador, mostrando todas as mensagens, imagens, vídeos e áudios.
+
+ IMPORTANTE:
+- Abra no computador (Windows ou Mac)
+- No celular pode não funcionar corretamente
