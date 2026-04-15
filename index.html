@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Conversa WhatsApp</title>
+<style>
+body { font-family: Arial; background:#e5ddd5; padding:20px; }
+.msg { background:white; padding:10px; border-radius:8px; margin:5px; max-width:60%; }
+img, video { max-width:300px; display:block; margin-top:5px; }
+</style>
+</head>
+<body>
+
+<h2>Conversa WhatsApp</h2>
+
+<input type="file" id="fileInput">
+<div id="chat"></div>
+
+<script>
+document.getElementById('fileInput').addEventListener('change', function(e) {
+const file = e.target.files[0];
+const reader = new FileReader();
+
+reader.onload = function() {
+const text = reader.result;
+const chat = document.getElementById('chat');
+chat.innerHTML = '';
+
+text.split('\n').forEach(line => {
+if (!line.trim()) return;
+
+let div = document.createElement('div');
+div.className = 'msg';
+div.innerText = line;
+
+if (line.match(/IMG.*\.jpg/i)) {
+let file = line.match(/IMG.*\.jpg/i)[0];
+div.innerHTML += '<img src="' + file + '">';
+}
+
+if (line.match(/VID.*\.mp4/i)) {
+let file = line.match(/VID.*\.mp4/i)[0];
+div.innerHTML += '<video controls src="' + file + '"></video>';
+}
+
+if (line.match(/PTT.*\.opus/i)) {
+let file = line.match(/PTT.*\.opus/i)[0];
+div.innerHTML += '<audio controls src="' + file + '"></audio>';
+}
+
+chat.appendChild(div);
+});
+};
+
+reader.readAsText(file);
+});
+</script>
+
+</body>
+</html>
