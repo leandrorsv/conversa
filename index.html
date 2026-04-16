@@ -6,27 +6,27 @@
 
 <style>
 body {
-font-family: Arial;
-background: #e5ddd5;
-padding: 20px;
+ font-family: Arial;
+ background: #e5ddd5;
+ padding: 20px;
 }
 
 .msg {
-background: white;
-padding: 10px;
-margin: 5px 0;
-border-radius: 8px;
-max-width: 600px;
+ background: white;
+ padding: 10px;
+ margin: 5px 0;
+ border-radius: 8px;
+ max-width: 600px;
 }
 
 img, video, audio {
-max-width: 250px;
-display: block;
-margin-top: 5px;
+ max-width: 250px;
+ display: block;
+ margin-top: 5px;
 }
 </style>
-
 </head>
+
 <body>
 
 <h2>Conversa WhatsApp</h2>
@@ -34,21 +34,39 @@ margin-top: 5px;
 <div id="chat"></div>
 
 <script>
-fetch('./conversa.txt')
-.then(res => res.text())
-.then(text => {
+// COLE AQUI O TEXTO DA SUA conversa.txt ENTRE AS CRASES
+const texto = `COLE_AQUI_TUDO_DA_CONVERSA_TXT`;
 
 const chat = document.getElementById('chat');
 
-text.split('\n').forEach(line => {
+texto.split('\n').forEach(line => {
+ if (!line.trim()) return;
 
-if (!line.trim()) return;
+ let div = document.createElement('div');
+ div.className = 'msg';
+ div.innerText = line;
 
-let div = document.createElement('div');
-div.className = 'msg';
-div.innerText = line;
+ // imagens
+ let img = line.match(/IMG-\d+.*\.(jpg|jpeg|png)/i);
+ if (img) {
+ div.innerHTML += `<img src="${img[0]}">`;
+ }
 
-// imagens
-let img = line.match(/IMG-[\w-]+\.jpg/i);
-if (img) {
-div.innerHTML += `<img src="${img[0]}">`;
+ // vídeos
+ let vid = line.match(/VID-\d+.*\.mp4/i);
+ if (vid) {
+ div.innerHTML += `<video controls src="${vid[0]}"></video>`;
+ }
+
+ // áudios
+ let aud = line.match(/PTT-\d+.*\.opus/i);
+ if (aud) {
+ div.innerHTML += `<audio controls src="${aud[0]}"></audio>`;
+ }
+
+ chat.appendChild(div);
+});
+</script>
+
+</body>
+</html>
